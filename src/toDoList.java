@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -9,75 +7,83 @@ import java.util.Scanner;
  */
 
 public class toDoList {
+    /**
+     * The main list for storing the input data.
+     */
+    private static LinkedList<String> myList = new LinkedList<String>();
+    private static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         // Ask for user's input, end with a -1 (Experiment with a bufferedstring?)
         // Strikethrough?
         // Give like a cool frame?
         // Change between X and O?
 
-        LinkedList<String> myList = new LinkedList<>();
-        Scanner sc = new Scanner(System.in);
         boolean repeatLoop = true;
         while(repeatLoop) {
-            menu();
+            System.out.println("Please choose according to the numbers: ");
+            System.out.println("1). Add item(s)");
+            System.out.println("2). Delete item(s)");
+            System.out.println("3). Print list");
+            System.out.println("4). Exit");
             System.out.print("Enter your choice: ");
             int num = sc.nextInt();
             switch (num) {
                 case 1:
-                    myList = add();
+                    add();
                     break;
                 case 2:
                     removeItem();
                     break;
                 case 3:
-                    printList(myList);
+                    printList();
                     break;
                 case 4:
                     repeatLoop = false;
+                    sc.close();
                     System.out.println("End of program");
                     break;
                 default:
                     System.out.println("Invalid input");
             }
         }
-        sc.close();
     }
 
-    public static void menu() {
-        System.out.println("Please choose according to the numbers: ");
-        System.out.println("1). Add item(s)");
-        System.out.println("2). Delete item(s)");
-        System.out.println("3). Print list");
-        System.out.println("4). Exit");
-    }
-
-    public static LinkedList<String> add() {
+    public static void add() {
         System.out.println("Please add your items (Enter -1 to stop)");
-        LinkedList<String> myList = new LinkedList<String>();
-        Scanner sc = new Scanner(System.in);
         boolean isContinueAdding = true;
         while (isContinueAdding) {
-            String input = sc.nextLine();
+            String input = sc.next();
             if (input.compareToIgnoreCase("-1") == 0) {
                 isContinueAdding = false;
             } else {
                 myList.add(input);
             }
         }
-        sc.close();
-        return myList;
     }
 
     public static void removeItem() {
-
+        System.out.print("Enter the item you want to remove: ");
+        String item = sc.next();
+        System.out.println();
+        if(myList.contains(item)) {
+            myList.remove(item);
+            System.out.println("Removed: " + item);
+        } else {
+            System.out.println("Item doesn't exist");
+        }
     }
 
-    public static void printList(LinkedList<String> myList) {
+    public static void printList() {
         // Iterating linked list
         Iterator<String> iterator = myList.iterator();
+        System.out.print("----------------------------\n");
+        System.out.print("|        TO-DO List        |\n");
+        System.out.print("----------------------------\n");
         while(iterator.hasNext()) {
             System.out.println(iterator.next());
         }
+        System.out.println("----------------------------");
     }
 
 }
