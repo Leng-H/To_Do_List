@@ -14,11 +14,6 @@ public class toDoList {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        // Ask for user's input, end with a -1 (Experiment with a bufferedstring?)
-        // Strikethrough?
-        // Give like a cool frame?
-        // Change between X and O?
-
         boolean repeatLoop = true;
         while(repeatLoop) {
             System.out.println("Please choose according to the numbers: ");
@@ -48,6 +43,7 @@ public class toDoList {
             }
         }
     }
+
 
     public static void add() {
         System.out.println("Please add your items (Enter -1 to stop)");
